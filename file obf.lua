@@ -453,15 +453,12 @@ local GetKeyButton = MainFrame:WaitForChild("GetKeyButton")
 local function removeUI()
     uiElements["KeyUI"]:Destroy()
 end 
-local keyloader = ""
 local keycheck = false
 local function CheckKey()
     local keytype = textBox.text
 	if keycheck == false then
-        if isfile("Key_Yutohub.txt") then
- keyloader = readfile("Key_Yutohub.txt")
-        end
-		if PandaAuth:ValidateKey(service_name,keytype) or PandaAuth:ValidateKey(service_name,tostring(keyloader))  then 
+
+		if PandaAuth:ValidateKey(service_name,keytype) or PandaAuth:ValidateKey(service_name,readfile("Key_Yutohub.txt"))  then 
 			if game.HttpService:JSONDecode(http_request({Url = "https://script.google.com/macros/s/AKfycbyX-y2gkzSXkRllcptQMbenc8yPDzC4XT_MBv1PizaiEq61tlAX9zBMF8QBrVNjistX/exec",Method = "GET"}).Body)["reason"] == "grmng5m5myj6y" then
 			keycheck = true
 			KeyValidLable.Text = "Accept key"
